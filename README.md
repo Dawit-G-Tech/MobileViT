@@ -89,14 +89,6 @@ python train.py --model s --epochs 100 --batch-size 128
 - **Data Augmentation**: Random crop (padding=4) and horizontal flip
 - **Normalization**: CIFAR-10 mean/std normalization
 
-## Expected Results
-
-Training typically achieves:
-- **MobileViT-XXS**: ~85-88% accuracy on CIFAR-10
-- **MobileViT-XS**: ~87-90% accuracy on CIFAR-10
-- **MobileViT-S**: ~89-92% accuracy on CIFAR-10
-
-(Results may vary based on training configuration and hardware)
 
 ## Implementation Notes
 
