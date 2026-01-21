@@ -1,8 +1,3 @@
-"""
-Test script to verify MobileViT handles arbitrary input dimensions correctly.
-This tests the "Dimension Defense" requirement.
-"""
-
 import torch
 from mobilevit import mobilevit_xxs, mobilevit_xs, mobilevit_s
 
@@ -43,7 +38,6 @@ def test_dimension_defense(model, test_cases):
 
 
 if __name__ == '__main__':
-    # Test cases with "weird" dimensions
     test_cases = [
         (3, 3, 33, 33),      # Weird height/width
         (1, 3, 32, 32),      # Standard CIFAR-10
@@ -82,4 +76,4 @@ if __name__ == '__main__':
     if total_failed == 0:
         print("✓ All tests passed! Model handles arbitrary dimensions correctly.")
     else:
-        print("✗ Some tests failed. Check the implementation.")
+        print("✗ Some tests failed.")

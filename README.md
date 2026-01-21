@@ -1,15 +1,12 @@
 # MobileViT for CIFAR-10 Classification
 
-This repository contains an implementation of MobileViT, a lightweight hybrid architecture that combines the strengths of CNNs and Vision Transformers, optimized for CIFAR-10 image classification.
-
-## Overview
+This project contains an implementation of MobileViT, a lightweight hybrid architecture that combines the strengths of CNNs and Vision Transformers, optimized for CIFAR-10 image classification.
 
 MobileViT is designed to address the "lightweight" challenge by:
 - Combining CNN speed with Transformer accuracy
 - Using a novel "Unfold - Transform - Fold" mechanism for efficient global attention
 - Maintaining spatial relationships while processing global context
 
-## Architecture Highlights
 
 ### MobileViT Block Components:
 1. **Local Representation (L)**: 3x3 convolutions for capturing low-level features (edges, textures)
@@ -114,6 +111,3 @@ The implementation follows the MobileViT paper's architecture:
 - [MobileViT Paper](https://arxiv.org/abs/2110.02178)
 - Original implementation concepts from Apple's MobileViT
 
-## License
-
-This implementation is provided for educational purposes.

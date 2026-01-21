@@ -57,21 +57,14 @@ class InvertedResidualBlock(nn.Module):
             # Point-wise expansion
             layers.append(ConvBlock(in_channels, hidden_dim, kernel_size=1, padding=0))
         
-        # Depth-wise convolution - adjust padding for stride=2
-        if stride == 2:
-            # For stride=2, we need padding=1 to get output_size = input_size/2
-            padding = 1
-        else:
-            # For stride=1, padding=1 maintains spatial dimensions
-            padding = 1
-        
+        # Depth-wise convolution
         layers.append(
             ConvBlock(
                 hidden_dim,
                 hidden_dim,
                 kernel_size=3,
                 stride=stride,
-                padding=padding,
+                padding=1,
                 groups=hidden_dim,
             )
         )
@@ -124,10 +117,6 @@ class TransformerBlock(nn.Module):
     
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         # x shape: (B, N, P, d)
-        # where:
-        #   N = number of patches
-        #   P = number of pixels within each patch
-        #   d = embedding dimension
         B, N, P, d = x.shape
         
         # Reshape for attention: (B*N, P, d)

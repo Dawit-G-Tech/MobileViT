@@ -1,7 +1,3 @@
-"""
-Training script for MobileViT on CIFAR-10
-"""
-
 import torch
 import torch.nn as nn
 import torch.optim as optim
