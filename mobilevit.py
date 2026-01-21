@@ -140,11 +140,6 @@ class TransformerBlock(nn.Module):
 class MobileViTBlock(nn.Module):
     """
     MobileViT Block implementing the "Unfold - Transform - Fold" mechanism.
-    
-    This block combines:
-    - Local Representation (L): 3x3 convolutions for local features
-    - Global Representation (G): Sparse Global Attention via Transformer
-    - Fusion (F): Concatenation of local and global features
     """
     
     def __init__(
@@ -197,11 +192,6 @@ class MobileViTBlock(nn.Module):
         """
         Unfold operation: Convert (B, C, H, W) to (B, N, P, d)
         
-        Notation (following the MobileViT paper):
-        - N = number of patches
-        - P = number of pixels in each patch
-        - d = channels / embedding dimension
-        
         This allows the transformer to process "pixels at the same position
         across all patches" rather than just neighboring pixels.
         """
@@ -249,11 +239,6 @@ class MobileViTBlock(nn.Module):
     def folding(self, x: torch.Tensor, info_dict: dict) -> torch.Tensor:
         """
         Fold operation: Convert (B, N, P, d) back to (B, C, H, W)
-        
-        Notation matches `unfolding`:
-        - N = number of patches
-        - P = number of pixels per patch
-        - d = channels / embedding dimension
         """
         B, N, P, d = x.shape
         num_patches_h, num_patches_w = info_dict["num_patches"]
@@ -278,12 +263,7 @@ class MobileViTBlock(nn.Module):
         return x
     
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """
-        Forward pass through MobileViT block:
-        1. Local representation (3x3 conv)
-        2. Unfold -> Transform -> Fold (Global representation)
-        3. Fusion (concatenate local + global)
-        """
+
         # Local representation
         local_features = self.local_rep(x)
         
@@ -312,8 +292,8 @@ class MobileViTBlock(nn.Module):
 
 class MobileViT(nn.Module):
     """
-    MobileViT model for image classification.
-    Optimized for CIFAR-10 (32x32 images).
+    MobileViT for CIFAR-10 image classification.
+    
     """
     
     def __init__(
